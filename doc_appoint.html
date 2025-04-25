@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Listing Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for elements that Tailwind doesn't directly handle or for more visual consistency */
+        .doctor-card {
+            @apply bg-white rounded-lg shadow-md mb-4;
+        }
+        .doctor-name {
+            @apply text-lg font-semibold text-gray-900;
+        }
+        .doctor-specialty {
+            @apply text-sm text-gray-500;
+        }
+        .doctor-experience {
+            @apply text-sm text-gray-600;
+        }
+        .doctor-fee {
+            @apply text-md font-semibold text-gray-700;
+        }
+        .filter-header-sort,
+        .filter-header-speciality,
+        .filter-header-moc {
+            @apply font-semibold text-gray-900 block mb-2;
+        }
+
+        .filter-specialty {
+            /* You can add more specific styling if needed, or just use Tailwind's classes */
+        }
+        .filter-video-consult {
+             /* You can add more specific styling if needed, or just use Tailwind's classes */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 font-inter">
+    <div class="container mx-auto px-4 py-8">
+        <div class="mb-6">
+            <input
+                type="text"
+                placeholder="Enter doctor names..."
+                class="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:outline-none"
+            />
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <div class="w-full md:w-64 space-y-6">
+                <div class="space-y-4">
+                    <h3 class="font-semibold filter-header-sort">Sort</h3>
+                    <select class="w-full px-4 py-2 rounded-md border border-gray-300 focus:ring focus:ring-blue-200 focus:outline-none">
+                        <option value="">Sort By</option>
+                        <option value="price-asc">Sort by fees (Ascending)</option>
+                        <option value="price-desc">Sort by fees (Descending)</option>
+                        <option value="experience-asc">Sort by experience (Ascending)</option>
+                        <option value="experience-desc">Sort by experience (Descending)</option>
+                    </select>
+                </div>
+
+                <div class="space-y-4 pt-6 border-t border-gray-200">
+                    <h3 class="font-semibold filter-header-speciality">Speciality</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-general-physician" class="mr-2 filter-specialty filter-specialty-general-physician">
+                            <label for="specialty-general-physician" class="text-gray-700">General Physician</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-dentist" class="mr-2 filter-specialty filter-specialty-dentist">
+                            <label for="specialty-dentist" class="text-gray-700">Dentist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-dermatologist" class="mr-2 filter-specialty filter-specialty-dermatologist">
+                            <label for="specialty-dermatologist" class="text-gray-700">Dermatologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-paediatrician" class="mr-2 filter-specialty filter-specialty-paediatrician">
+                            <label for="specialty-paediatrician" class="text-gray-700">Paediatrician</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-gynaecologist" class="mr-2 filter-specialty filter-specialty-gynaecologist">
+                            <label for="specialty-gynaecologist" class="text-gray-700">Gynaecologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-ent" class="mr-2 filter-specialty filter-specialty-ent">
+                            <label for="specialty-ent" class="text-gray-700">ENT</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-diabetologist" class="mr-2 filter-specialty filter-specialty-diabetologist">
+                            <label for="specialty-diabetologist" class="text-gray-700">Diabetologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-cardiologist" class="mr-2 filter-specialty filter-specialty-cardiologist">
+                            <label for="specialty-cardiologist" class="text-gray-700">Cardiologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-physiotherapist" class="mr-2 filter-specialty filter-specialty-physiotherapist">
+                            <label for="specialty-physiotherapist" class="text-gray-700">Physiotherapist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-endocrinologist" class="mr-2 filter-specialty filter-specialty-endocrinologist">
+                            <label for="specialty-endocrinologist" class="text-gray-700">Endocrinologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-orthopaedic" class="mr-2 filter-specialty filter-specialty-orthopaedic">
+                            <label for="specialty-orthopaedic" class="text-gray-700">Orthopaedic</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-ophthalmologist" class="mr-2 filter-specialty filter-specialty-ophthalmologist">
+                            <label for="specialty-ophthalmologist" class="text-gray-700">Ophthalmologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-gastroenterologist" class="mr-2 filter-specialty filter-specialty-gastroenterologist">
+                            <label for="specialty-gastroenterologist" class="text-gray-700">Gastroenterologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-pulmonologist" class="mr-2 filter-specialty filter-specialty-pulmonologist">
+                            <label for="specialty-pulmonologist" class="text-gray-700">Pulmonologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-psychiatrist" class="mr-2 filter-specialty filter-specialty-psychiatrist">
+                            <label for="specialty-psychiatrist" class="text-gray-700">Psychiatrist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-urologist" class="mr-2 filter-specialty filter-specialty-urologist">
+                            <label for="specialty-urologist" class="text-gray-700">Urologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-dietitian-nutritionist" class="mr-2 filter-specialty filter-specialty-dietitian-nutritionist">
+                            <label for="specialty-dietitian-nutritionist" class="text-gray-700">Dietitian / Nutritionist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-psychologist" class="mr-2 filter-specialty filter-specialty-psychologist">
+                            <label for="specialty-psychologist" class="text-gray-700">Psychologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-sexologist" class="mr-2 filter-specialty filter-specialty-sexologist">
+                            <label for="specialty-sexologist" class="text-gray-700">Sexologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-nephrologist" class="mr-2 filter-specialty filter-specialty-nephrologist">
+                            <label for="specialty-nephrologist" class="text-gray-700">Nephrologist</label>
+                        </div>
+                         <div class="flex items-center">
+                            <input type="checkbox" id="specialty-neurologist" class="mr-2 filter-specialty filter-specialty-neurologist">
+                            <label for="specialty-neurologist" class="text-gray-700">Neurologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-oncologist" class="mr-2 filter-specialty filter-specialty-oncologist">
+                            <label for="specialty-oncologist" class="text-gray-700">Oncologist</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-ayurveda" class="mr-2 filter-specialty filter-specialty-ayurveda">
+                            <label for="specialty-ayurveda" class="text-gray-700">Ayurveda</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="specialty-homeopath" class="mr-2 filter-specialty filter-specialty-homeopath">
+                            <label for="specialty-homeopath" class="text-gray-700">Homeopath</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pt-6 border-t border-gray-200">
+                    <h3 class="font-semibold filter-header-moc">Consultation Mode</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="radio" id="mode-video" name="consultation-mode" value="video" class="mr-2 filter-video-consult">
+                            <label for="mode-video" class="text-gray-700">Video Consult</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="radio" id="mode-in-clinic" name="consultation-mode" value="in-clinic" class="mr-2">
+                            <label for="mode-in-clinic" class="text-gray-700">In Clinic</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1">
+                <div class="doctor-card">
+                    <div class="flex items-center space-y-0 pb-2 border-b border-gray-200 p-4">
+                        <img src="https://source.unsplash.com/random/150x150/?doctor,1" alt="Doctor Name" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h2 class="doctor-name">Dr. Munef Inamdar</h2>
+                            <p class="doctor-specialty">General Physician</p>
+                            <p class="doctor-experience">Experience: 10 years</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p>Clinic: Varanasi Clinic</p>
+                        <p class="doctor-fee">Price: ₹600</p>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Book Appointment</button>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="flex items-center space-y-0 pb-2 border-b border-gray-200 p-4">
+                        <img src="https://source.unsplash.com/random/150x150/?doctor,2" alt="Doctor Name" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h2 class="doctor-name">Dr. Subhash Bajaj</h2>
+                            <p class="doctor-specialty">General Physician</p>
+                             <p class="doctor-experience">Experience: 15 years</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p>Clinic: Mirzapur Clinic</p>
+                        <p class="doctor-fee">Price: ₹600</p>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Book Appointment</button>
+                    </div>
+                </div>
+                 <div class="doctor-card">
+                    <div class="flex items-center space-y-0 pb-2 border-b border-gray-200 p-4">
+                        <img src="https://source.unsplash.com/random/150x150/?doctor,3" alt="Doctor Name" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h2 class="doctor-name">Dr. Mufaddal Zakir</h2>
+                            <p class="doctor-specialty">Dentist</p>
+                             <p class="doctor-experience">Experience: 5 years</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p>Clinic: Sparsh Hospital</p>
+                        <p class="doctor-fee">Price: ₹600</p>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Book Appointment</button>
+                    </div>
+                </div>
+                 <div class="doctor-card">
+                    <div class="flex items-center space-y-0 pb-2 border-b border-gray-200 p-4">
+                        <img src="https://source.unsplash.com/random/150x150/?doctor,4" alt="Doctor Name" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h2 class="doctor-name">Dr. Ajay Gargali</h2>
+                            <p class="doctor-specialty">General Physician</p>
+                             <p class="doctor-experience">Experience: 8 years</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p>Clinic: Varanasi Clinic</p>
+                        <p class="doctor-fee">Price: ₹400</p>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Book Appointment</button>
+                    </div>
+                </div>
+                 <div class="doctor-card">
+                    <div class="flex items-center space-y-0 pb-2 border-b border-gray-200 p-4">
+                        <img src="https://source.unsplash.com/random/150x150/?doctor,5" alt="Doctor Name" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h2 class="doctor-name">Dr. Shweta Singh</h2>
+                            <p class="doctor-specialty">Gynaecologist</p>
+                             <p class="doctor-experience">Experience: 12 years</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p>Clinic: Prayagraj Clinic</p>
+                        <p class="doctor-fee">Price: ₹800</p>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Book Appointment</button>
+                    </div>
+                </div>
+                 <div class="doctor-card">
+                    <div class="flex items-center space-y-0 pb-2 border-b border-gray-200 p-4">
+                        <img src="doc1.jpg" alt="Doctor Name" class="w-16 h-16 rounded-full mr-4"/>
+                        <div>
+                            <h2 class="doctor-name">Dr. Rajiv Kumar</h2>
+                            <p class="doctor-specialty">Cardiologist</p>
+                            <p class="doctor-experience">Experience: 20 years</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <p>Clinic: Varanasi Heart Center</p>
+                        <p class="doctor-fee">Price: ₹1000</p>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Book Appointment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script>
+        // Get references to the input and select elements
+        const autocompleteInput = document.querySelector('input[placeholder="Enter doctor names..."]');
+        const sortSelect = document.querySelector('select');
+        const specialtyCheckboxes = document.querySelectorAll('.filter-specialty');
+        const consultationModeRadios = document.querySelectorAll('input[name="consultation-mode"]');
+        const doctorCards = document.querySelectorAll('.doctor-card');
+
+        // Sample Data (Replace with your actual dataset)
+        const initialDoctors = [
+            { id: 1, name: 'Dr. Munef Inamdar', specialty: 'General Physician', clinic: 'Varanasi Clinic', price: 600, experience: 10, image: 'https://source.unsplash.com/random/150x150/?doctor,1' },
+            { id: 2, name: 'Dr. Subhash Bajaj', specialty: 'General Physician', clinic: 'Mirzapur Clinic', price: 600, experience: 15, image: 'https://source.unsplash.com/random/150x150/?doctor,2' },
+            { id: 3, name: 'Dr. Mufaddal Zakir', specialty: 'Dentist', clinic: 'Sparsh Hospital', price: 600, experience: 5, image: 'https://source.unsplash.com/random/150x150/?doctor,3' },
+            { id: 4, name: 'Dr. Ajay Gargali', specialty: 'General Physician', clinic: 'Varanasi Clinic', price: 400, experience: 8, image: 'https://source.unsplash.com/random/150x150/?doctor,4' },
+            { id: 5, name: 'Dr. Shweta Singh', specialty: 'Gynecologist', clinic: 'Prayagraj Clinic', price: 800, experience: 12, image: 'https://source.unsplash.com/random/150x150/?doctor,5' },
+            { id: 6, name: 'Dr. Rajiv Kumar', specialty: 'Cardiologist', clinic: 'Varanasi Heart Center', price: 1000, experience: 20, image: 'https://source.unsplash.com/random/150x150/?doctor,6' },
+             { id: 7, name: 'Dr. Sunil Sharma', specialty: 'Physiotherapist', clinic: 'Wellness Center', price: 500, experience: 7, image: 'https://source.unsplash.com/random/150x150/?doctor,7' },
+            { id: 8, name: 'Dr. Priya Kapoor', specialty: 'Endocrinologist', clinic: 'Endocrine Clinic', price: 900, experience: 14, image: 'https://source.unsplash.com/random/150x150/?doctor,8' },
+            { id: 9, name: 'Dr. Rakesh Mehta', specialty: 'Orthopaedic', clinic: 'Bone and Joint Hospital', price: 750, experience: 11, image: 'https://source.unsplash.com/random/150x150/?doctor,9' },
+            { id: 10, name: 'Dr. Anika Reddy', specialty: 'Ophthalmologist', clinic: 'Eye Care Center', price: 850, experience: 9, image: 'https://source.unsplash.com/random/150x150/?doctor,10' },
+            { id: 11, name: 'Dr. Sameer Khan', specialty: 'Gastroenterologist', clinic: 'Digestive Health Institute', price: 1100, experience: 18, image: 'https://source.unsplash.com/random/150x150/?doctor,11' },
+            { id: 12, name: 'Dr. Deepa Verma', specialty: 'Pulmonologist', clinic: 'Lung Care Hospital', price: 1050, experience: 16, image: 'https://source.unsplash.com/random/150x150/?doctor,12' },
+            { id: 13, name: 'Dr. Karthik Nair', specialty: 'Psychiatrist', clinic: 'Mind Wellness Clinic', price: 950, experience: 13, image: 'https://source.unsplash.com/random/150x150/?doctor,13' },
+            { id: 14, name: 'Dr. Kavita Patel', specialty: 'Urologist', clinic: 'Urology Center', price: 1000, experience: 17, image: 'https://source.unsplash.com/random/150x150/?doctor,14' },
+            { id: 15, name: 'Ms. Neha Singh', specialty: 'Dietitian / Nutritionist', clinic: 'Nutrition & Wellness Hub', price: 400, experience: 6, image: 'https://source.unsplash.com/random/150x150/?doctor,15' },
+            { id: 16, name: 'Mr. Rohan Gupta', specialty: 'Psychologist', clinic: 'Counseling Center', price: 650, experience: 10, image: 'https://source.unsplash.com/random/150x150/?doctor,16' },
+            { id: 17, name: 'Dr. Vikram Seth', specialty: 'Sexologist', clinic: 'Sexual Health Clinic', price: 1200, experience: 22, image: 'https://source.unsplash.com/random/150x150/?doctor,17' },
+            { id: 18, name: 'Dr. Aisha Khan', specialty: 'Nephrologist', clinic: 'Kidney Care Institute', price: 1150, experience: 19, image: 'https://source.unsplash.com/random/150x150/?doctor,18' },
+            { id: 19, name: 'Dr. Aarav Sharma', specialty: 'Neurologist', clinic: 'Neuroscience Center', price: 1250, experience: 21, image: 'https://source.unsplash.com/random/150x150/?doctor,19' },
+            { id: 20, name: 'Dr. Diya Malhotra', specialty: 'Oncologist', clinic: 'Cancer Care Hospital', price: 1300, experience: 23, image: 'https://source.unsplash.com/random/150x150/?doctor,20' },
+            { id: 21, name: 'Dr. Sanjay Joshi', specialty: 'Ayurveda', clinic: 'Ayurveda Health Center', price: 550, experience: 8, image: 'https://source.unsplash.com/random/150x150/?doctor,21' },
+            { id: 22, name: 'Dr. Smita Kumari', specialty: 'Homeopath', clinic: 'Homeopathy Clinic', price: 450, experience: 7, image: 'https://source.unsplash.com/random/150x150/?doctor,22' },
+        ];
+
+        let filteredDoctors = [...initialDoctors]; // Start with all doctors
+
+        // 
